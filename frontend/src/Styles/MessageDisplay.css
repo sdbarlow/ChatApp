@@ -1,0 +1,7 @@
+#detail-container{
+    width: 78vw;
+    height:79.5vh;
+    position: absolute;
+    left: 21vw;
+    border: 2px solid red;
+}

@@ -1,18 +1,20 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import { Routes, Route } from "react-router-dom"
-import Action from './Action'
-function Home({ LogIn }) {
+import { useState } from "react";
+import { Link, Outlet } from "react-router-dom";
+import SignUpModal from "./SignUp";
+import LoginModal from "./LogIn";
+
+function Home() {
+
   return (
     <>
-    <div>ChatApp</div>
-    <Link to="/home/SignUp"><button>Sign Up</button></Link>
-    <Link to="/home/LogIn"><button>Log In</button></Link>
-    <Routes>
-        <Route path="/Action" element={Action}></Route>
-    </Routes>
+    <div>
+      <h1>Chat App</h1>
+      <Link to="/SignUp">Sign up</Link>
+      <Link to="/LogIn">Log in</Link>
+    </div>
+    <Outlet/>
     </>
-  )
+  );
 }
 
-export default Home
+export default Home;

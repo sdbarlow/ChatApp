@@ -1,17 +1,36 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link } from "react-router-dom";
+import { useState } from "react";
 
-function LogIn() {
+function LoginModal({ onLogin }) {
+  const [username, setUsername] = useState("")
+  const [password, setPassword] = useState("")
+
+  function handleChange(e){
+    if (e.target.id == "username"){
+      setUsername(e.target.value);
+    }
+    else {
+      setPassword(e.target.value);
+    }
+  }
+
+  function handlesubmit(event){
+    event.preventDefault();
+    onLogin(username);
+  }
+console.log(username)
+console.log(password)
   return (
-    <>
-    <div>ChatApp</div>
-    <form>
-      <input type="text" placeholder='Email'/>
-      <input type="text" placeholder='Password'/>
-      <Link to="/Action"><input type="submit"></input></Link>
-    </form>
-    </>
-  )
+    <div>
+      <h2>Log in</h2>
+      <form onSubmit={handlesubmit}>
+        <input id="username" value={username} onChange={handleChange} type="text"/>
+        <input id="password" value={password} onChange={handleChange} type="text"/>
+        <input type="submit"/>
+      </form>
+      <Link to="/">Back to home</Link>
+    </div>
+  );
 }
 
-export default LogIn
+export default LoginModal;
