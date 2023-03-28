@@ -1,19 +1,18 @@
 import Action from './components/Action'
+import Home from './components/Home'
 import LogIn from './components/LogIn'
 import SignUp from './components/SignUp'
-import {
-  BrowserRouter as Router,
-  Route
-} from "react-router-dom";
+import { Routes, Route, Link } from "react-router-dom"
 
 function App() {
   return (
-    <Router>
-      <Route path="/" exact component={App}/>
-      <Action />
-      <LogIn />
-      <SignUp />
-    </Router>
+    <>
+    <Routes>
+              <Route path="/home" element={<Home/>}/>
+              <Route path="/home/LogIn" element={<LogIn/>}/>
+              <Route path="/home/SignUp" element={<SignUp/>}/>
+    </Routes>
+    </>
   );
 }
 
