@@ -18,8 +18,6 @@ function LoginModal({ onLogin }) {
     event.preventDefault();
     onLogin(username);
   }
-console.log(username)
-console.log(password)
   return (
     <div>
       <h2>Log in</h2>

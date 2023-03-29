@@ -1,7 +1,14 @@
 conversations = [
     {
+    "id": 1,
     'senderID': '1',
-    'convo': ['Hi How are you?', 'Im good! how about you?'],
+    'convo': 'Hi How are you?',
+    'receiverID': '2'
+    },
+    {
+    "id": 2,
+    'senderID': '1',
+    'convo':  'Im good! how about you?',
     'receiverID': '2'
     },
     {
