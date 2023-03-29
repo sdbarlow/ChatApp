@@ -4,6 +4,8 @@ import '../Styles/ListComponent.css'
 
 const ListComponent = ({ loggedinuser, users, convos }) => {
 
+
+
   return (
     <div id="list-container">
       <ul>
@@ -23,7 +25,7 @@ const ListComponent = ({ loggedinuser, users, convos }) => {
                     </div>
                     <div className="user-info">
                       <h3>{`${user.fields.first_name} ${user.fields.last_name}`}</h3>
-                      <p>{user.fields.email}</p>
+                      <p>{convos[convos.length-1].fields.convo}</p>
                     </div>
                   </div>
                 </Link>

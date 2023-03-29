@@ -10,10 +10,14 @@ console.log(convos)
       <h1>Conversation {id} Detail</h1>
       <div className="message-container">
         <div className="message-display">
-          {/* <div id="receiver-message">{convos[0].fields.convo}</div>  
-          {/* person logged in */}
-          {/* <div id="sender-message">{convos[1].fields.convo}</div>
-          // person sending */} 
+          {convos.filter(convo => {
+            let receiverwords = convo.fields.receiver.length >= 1;
+            <div id="receiver-message">{receiverwords}</div>  
+          })}
+          {convos.filter(convo => {
+            let senderwords = convo.fields.sender.length >= 1;
+            <div id="receiver-message">{senderwords}</div>  
+          })}
         </div>
         <div className="message-input">
           <input type="text"></input>

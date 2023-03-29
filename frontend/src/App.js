@@ -14,6 +14,15 @@ function App() {
   const [entireloggedinuser, setEntireLoggedInUser] = useState([])
   const [loggedinusername, setLoggedInUserName] = useState("");
   const [users, setUsers] = useState([]);
+  const [convos, setConvos] = useState([]);
+
+  useEffect(() => {
+    console.log("convos ran")
+    fetch(`/api/conversations/${loggedinuser}/`)
+      .then(resp => resp.json())
+      .then(data => {setConvos(JSON.parse(data));
+      })
+  }, [loggedinuser])
 
   useEffect(() => {
     fetch('/api/users/')
@@ -64,7 +73,7 @@ function App() {
               <Route path="/LogIn" element={<LoginModal onLogin={handleLogin}/>}/>
               <Route path="/SignUp" element={<SignUpModal/>}/>
             </Route>
-            <Route path="/messages/:id" element={<Action entire={entireloggedinuser} loggedinusername={loggedinusername} loggedinuser={loggedinuser}/>} />
+            <Route path="/messages/:id" element={<Action convos={convos} users={users} entire={entireloggedinuser} loggedinusername={loggedinusername} loggedinuser={loggedinuser}/>} />
             <Route path="/account/:id" element={<Account entire={entireloggedinuser}/>}/>
     </Routes>
     <Outlet/>
