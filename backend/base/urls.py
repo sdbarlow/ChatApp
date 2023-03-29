@@ -2,9 +2,10 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('', views.getRoutes, name="routes"),
-    path('conversations/', views.getConversations, name="conversations"),
+    path('conversations/<str:pk>/', views.getConversations, name="conversations"),
     path('users/', views.getUsers, name="users"),
+    path('user/<str:pk>/', views.getUser, name="user"),
     path('adduser/', views.postUser, name="userpost"),
+    path('deleteuser/<str:pk>/', views.deleteUser, name="deleteuser")
     # path('messages/<str:pk>', views.getMessage, name="message"),
 ]

@@ -12,3 +12,8 @@ class User(models.Model):
 
     def __str__(self):
         return f"{self.first_name} {self.last_name} {self.email} {self.password} {self.img} {self.is_online}"
+    
+class Conversation(models.Model):
+    sender = models.ForeignKey(User, related_name='sent_conversations', on_delete=models.CASCADE)
+    convo = models.CharField(max_length=1000)
+    receiver = models.ForeignKey(User, related_name='received_conversations', on_delete=models.CASCADE)

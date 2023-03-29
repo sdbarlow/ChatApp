@@ -2,12 +2,12 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 
 function LoginModal({ onLogin }) {
-  const [username, setUsername] = useState("")
+  const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
 
   function handleChange(e){
-    if (e.target.id == "username"){
-      setUsername(e.target.value);
+    if (e.target.id == "email"){
+      setEmail(e.target.value);
     }
     else {
       setPassword(e.target.value);
@@ -16,14 +16,18 @@ function LoginModal({ onLogin }) {
 
   function handlesubmit(event){
     event.preventDefault();
-    onLogin(username);
+    onLogin(email, password);
   }
+
+
   return (
     <div>
       <h2>Log in</h2>
       <form onSubmit={handlesubmit}>
-        <input id="username" value={username} onChange={handleChange} type="text"/>
-        <input id="password" value={password} onChange={handleChange} type="text"/>
+        <label htmlFor="email">Email:</label>
+        <input id="email" name="email" value={email} onChange={handleChange} type="text"/>
+        <label htmlFor="password">Password:</label>
+        <input id="password" name="password" value={password} onChange={handleChange} type="text"/>
         <input type="submit"/>
       </form>
       <Link to="/">Back to home</Link>

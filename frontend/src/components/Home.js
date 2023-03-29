@@ -1,7 +1,5 @@
 import { useState } from "react";
 import { Link, Outlet } from "react-router-dom";
-import SignUpModal from "./SignUp";
-import LoginModal from "./LogIn";
 
 function Home() {
 

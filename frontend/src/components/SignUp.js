@@ -1,6 +1,8 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+
 
 function SignUpModal() {
+  const navigate = useNavigate();
   const handleSubmit = async (event) => {
     event.preventDefault();
   
@@ -26,6 +28,9 @@ function SignUpModal() {
     } catch (error) {
       console.error('Error:', error);
     }
+
+    navigate('/');
+
   };
   
 

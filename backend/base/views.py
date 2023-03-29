@@ -1,26 +1,40 @@
 import json
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import JsonResponse
 from django.core import serializers
 from rest_framework.decorators import api_view
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.response import Response
-from .practice import conversations
+from django.db.models import Q
 
-from .models import User
+from .models import User, Conversation
 # Create your views here.
 
+
+
 @api_view(['GET'])
-def getRoutes(request):
-    routes = [
-        '/api/messages/',
-        '/api/messages/<id>/',
-        '/api/messages/create/'
-    ]
-    return Response(routes)
-@api_view(['GET'])
-def getConversations(request):
-    return Response(conversations)
+def getConversations(request, pk):
+    conversations = Conversation.objects.filter(Q(sender=pk) | Q(receiver=pk))
+    json_data = serializers.serialize('json', conversations)
+    return JsonResponse(json_data, safe=False)
+
+
+def getUser(request, pk):
+    user = get_object_or_404(User, id=pk)
+
+    if request.method == 'PATCH':
+        user.is_online = not user.is_online
+        user.save()
+    return JsonResponse('status', safe=False)
+
+def deleteUser(request, pk):
+    user = get_object_or_404(User, id=pk)
+
+    if request.method == 'DELETE':
+        user.delete()
+    return JsonResponse('status', safe=False)
+    
+
 
 
 def postUser(request):
