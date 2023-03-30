@@ -26,6 +26,7 @@ function messChanger(val){
 }
 
 useEffect(() => {
+  console.log("this was run")
     fetch(`/api/conversations/${loggedinuser}/`)
       .then(resp => resp.json())
       .then(data => {

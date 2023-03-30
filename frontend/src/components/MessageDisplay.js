@@ -70,24 +70,36 @@ if ((convos.length === 0) || (checkifclicked)){
       )}
 
       console.log(id)
+      console.log(convos)
       return (
         <div id="detail-container">
-        <div id="header-display"><h1>Conversation {id} Detail</h1><div onClick={clickHandler} id="new-message-icon-container"><img id="new-message-icon" src='../images/mail.png'></img></div></div>
-        <div className="message-container">
-        <div className="message-display">
-          {convos.map((convo) => (
-            id == convo.fields.sender ? (
-              <div className="receiver-message" >{convo.fields.convo}</div>
-              ) : id == convo.fields.receiver ? (
-              <div className="sender-message">{convo.fields.convo}</div>
-              ) : null
-          ))}
+          <div id="header-display">
+            <h1>Conversation {id} Detail</h1>
+            <div onClick={clickHandler} id="new-message-icon-container">
+              <img id="new-message-icon" src='../images/mail.png' />
+            </div>
+          </div>
+          <div className="message-container">
+            <div className="message-display">
+              <div className="receiver-field">
+                {convos.sort((a, b) => a.pk - b.pk).map((convo) => {
+                  console.log(convo);
+                  if (convo.fields.sender == id) {
+                    return <h4 className="sender-text">{convo.fields.convo}</h4>;
+                  } else if (convo.fields.receiver == id) {
+                    return <h4 className="receiver-text">{convo.fields.convo}</h4>;
+                  }
+                  return null;
+                })}
+              </div>
+            </div>
+          </div>
+          <div className="message-input">
+            <input value={message} onChange={handleChange} type="text" /><button onClick={() => messageClickHandler(id)}>⇪</button>
+          </div>
         </div>
-        <div className="message-input">
-          <input value={message} onChange={handleChange} type="text"></input><button onClick={() => messageClickHandler(id)}>⇪</button>
-        </div>
-      </div>
-    </div>
-  )
-}
+      );
+  }
+      
+      
 export default MessageDisplay
