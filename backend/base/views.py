@@ -51,6 +51,24 @@ def postConvo(request):
     # Return error response for non-POST requests
     return JsonResponse({'error': 'Invalid request method.'}, status=400)
 
+def newConvo(request):
+    if request.method == 'POST':
+
+        receiver_id = request.POST.get('receiver')
+        sender_id = request.POST.get('sender')
+        convo_id = request.POST.get('convo')
+
+        receiver = User.objects.get(id=receiver_id)
+        sender = User.objects.get(id=sender_id)
+
+        conversation = Conversation(receiver=receiver, convo=convo_id, sender=sender)
+        conversation.save()
+
+        return JsonResponse({}, status=200)
+
+    # Return error response for non-POST requests
+    return JsonResponse({'error': 'Invalid request method.'}, status=400)
+
 def postUser(request):
     if request.method == 'POST':
         # Get form data from request.POST

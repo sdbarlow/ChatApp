@@ -16,18 +16,67 @@ function App() {
   const [users, setUsers] = useState([]);
   const [convos, setConvos] = useState([]);
   const [checkusersagain, setCheckUsersAgain] = useState(false)
+  const [refetchusers, setReFetchUsers] = useState(false);
+  const [message, setMessage] = useState("");
 
 console.log(loggedinuser)
 
-  useEffect(() => {
-    console.log("convos ran")
+function messChanger(val){
+  setMessage(val)
+}
+
+useEffect(() => {
     fetch(`/api/conversations/${loggedinuser}/`)
       .then(resp => resp.json())
-      .then(data => {setConvos(JSON.parse(data));
+      .then(data => {
+        setConvos(JSON.parse(data));
       })
-  }, [loggedinuser, checkusersagain])
+    }, [loggedinuser, checkusersagain]);
+
+useEffect(() => {
+  const interval = setInterval(() => {
+    fetch(`/api/conversations/${loggedinuser}/`)
+      .then(resp => resp.json())
+      .then(data => {
+        setConvos(JSON.parse(data));
+      })
+      .catch(error => {
+        console.error("Error fetching conversations:", error);
+      });
+  }, 5000);
+  return () => clearInterval(interval);
+}, [loggedinuser]);
 
 
+
+  function submitFunction(event){
+
+    const formData = new FormData();
+    formData.append("first_name", event.target.elements.first_name.value);
+    formData.append("last_name", event.target.elements.last_name.value);
+    formData.append("email", event.target.elements.email.value);
+    formData.append("password", event.target.elements.password.value);
+    formData.append("img", event.target.elements.img.value);
+  
+    try {
+      const response = fetch('/api/adduser/', {
+        method: 'POST',
+        body: formData,
+      });
+  
+      // Check if the response was successful
+      if (response.ok) {
+        console.log('User created successfully');
+      } else {
+        console.error('Error:', response.status);
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
+    setReFetchUsers(!refetchusers)
+    navigate('/');
+
+  }
     
     const handleClick = async (val) => {
     
@@ -52,8 +101,7 @@ console.log(loggedinuser)
         console.error('Error:', error);
       }
     setCheckUsersAgain(!checkusersagain)
-
-  
+    navigate(`/messages/${val}`)
   }
 
   useEffect(() => {
@@ -61,7 +109,7 @@ console.log(loggedinuser)
       .then(resp => resp.json())
       .then(data => {setUsers(JSON.parse(data));
       })
-  }, [])
+  }, [refetchusers])
 
   useEffect(() => {
     if (loggedinuser) {
@@ -96,16 +144,40 @@ console.log(loggedinuser)
       }
 
     }}
-  
-    console.log(loggedinuser)
+
+    function messageSend(message, currentid){
+      const formData = new FormData();
+      formData.append("convo", message);
+      formData.append("sender", parseInt(loggedinuser))
+      formData.append("receiver", parseInt(currentid))
+    
+      try {
+        const response = fetch('/api/postconvo/', {
+          method: 'POST',
+          body: formData,
+        });
+    
+        // Check if the response was successful
+        if (response.ok) {
+          console.log('User created successfully');
+        } else {
+          console.error('Error:', response.status);
+        }
+      } catch (error) {
+        console.error('Error:', error);
+      }
+      setCheckUsersAgain(!checkusersagain)
+      setMessage("")
+    }
+
   return (
     <>
     <Routes>
             <Route path="/" exact element={<Home/>}>
               <Route path="/LogIn" element={<LoginModal onLogin={handleLogin}/>}/>
-              <Route path="/SignUp" element={<SignUpModal/>}/>
+              <Route path="/SignUp" element={<SignUpModal submitFunction={submitFunction}/>}/>
             </Route>
-            <Route path="/messages/:id" element={<Action handleClick={handleClick} convos={convos} users={users} entire={entireloggedinuser} loggedinusername={loggedinusername} loggedinuser={loggedinuser}/>} />
+            <Route path="/messages/:id" element={<Action messChanger={messChanger} message={message} messageSend={messageSend} handleClick={handleClick} convos={convos} users={users} entire={entireloggedinuser} loggedinusername={loggedinusername} loggedinuser={loggedinuser}/>} />
             <Route path="/account/:id" element={<Account entire={entireloggedinuser}/>}/>
     </Routes>
     <Outlet/>

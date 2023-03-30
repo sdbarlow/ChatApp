@@ -7,11 +7,11 @@ import '../Styles/Action.css'
 import { useEffect, useState } from 'react'
 
 
-function Action({ users, loggedinuser, loggedinusername, entire, convos, handleClick }) {
+function Action({ users, loggedinuser, loggedinusername, entire, convos, handleClick, messageSend, message, messChanger }) {
 
 
 
-
+console.log(loggedinuser)
 
 
 
@@ -20,7 +20,7 @@ function Action({ users, loggedinuser, loggedinusername, entire, convos, handleC
     <Header entire={entire} loggedinusername={loggedinusername}/>
     <div id="main-container">
       <ListComponent users={users} convos={convos} loggedinuser={loggedinuser} />
-      <MessageDisplay handleClick={handleClick} users={users} convos={convos} loggedinuser={loggedinuser}/>
+      <MessageDisplay messChanger={messChanger} message={message} messageSend={messageSend} handleClick={handleClick} users={users} convos={convos} loggedinuser={loggedinuser}/>
     </div>
     <Outlet/>
     </>

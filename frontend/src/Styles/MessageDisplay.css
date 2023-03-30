@@ -36,7 +36,10 @@
   }
   
   .message-display {
+    display: flex;
+    flex-direction: column;
     overflow-y: auto;
+    border: 2px solid black
   }
   
   .message-input {
@@ -59,19 +62,24 @@
   }
   
   .message-input button {
-    color: #fff;
+    background-color: #5CCEEE;
     border: none;
     padding: 0.5rem 1rem;
     border-radius: 5px;
     cursor: pointer;
   }
 
-  #receiver-message{
-text-align: left;
+  
+  .receiver-message {
+    align-items: left;
   }
-
-  #sender-message{
+  
+  .sender-message {
+    align-items: right;
+    display: inline-block;
+    padding-left:73vw;
     text-align: right;
+    border: 2px solid black
   }
 
   .user-table-data{
