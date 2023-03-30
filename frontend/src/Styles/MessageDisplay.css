@@ -5,6 +5,30 @@
     left: 21vw;
 }
 
+#header-display {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#new-message-icon-container {
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
+  overflow: hidden;
+}
+
+#new-message-icon-container:hover{
+  cursor: pointer;
+}
+
+#new-message-icon {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+
 .message-container {
     display: flex;
     flex-direction: column;
@@ -48,4 +72,28 @@ text-align: left;
 
   #sender-message{
     text-align: right;
+  }
+
+  .user-table-data{
+    text-align: center;
+  }
+
+  #user-data-row:hover{
+    background-color: aqua;
+    cursor: pointer;
+  }
+
+
+  #mini-image{
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    border-radius: 50%;
+    overflow: hidden;
+  }
+
+  #user-image{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }

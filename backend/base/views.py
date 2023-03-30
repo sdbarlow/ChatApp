@@ -34,8 +34,22 @@ def deleteUser(request, pk):
         user.delete()
     return JsonResponse('status', safe=False)
     
+def postConvo(request):
+    if request.method == 'POST':
 
+        receiver_id = request.POST.get('receiver')
+        sender_id = request.POST.get('sender')
 
+        receiver = User.objects.get(id=receiver_id)
+        sender = User.objects.get(id=sender_id)
+
+        conversation = Conversation(receiver=receiver, sender=sender)
+        conversation.save()
+
+        return JsonResponse({}, status=200)
+
+    # Return error response for non-POST requests
+    return JsonResponse({'error': 'Invalid request method.'}, status=400)
 
 def postUser(request):
     if request.method == 'POST':

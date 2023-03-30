@@ -15,5 +15,5 @@ class User(models.Model):
     
 class Conversation(models.Model):
     sender = models.ForeignKey(User, related_name='sent_conversations', on_delete=models.CASCADE)
-    convo = models.CharField(max_length=1000)
+    convo = models.CharField(max_length=1000, blank=True)
     receiver = models.ForeignKey(User, related_name='received_conversations', on_delete=models.CASCADE)

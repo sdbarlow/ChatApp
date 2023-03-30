@@ -15,6 +15,9 @@ function App() {
   const [loggedinusername, setLoggedInUserName] = useState("");
   const [users, setUsers] = useState([]);
   const [convos, setConvos] = useState([]);
+  const [checkusersagain, setCheckUsersAgain] = useState(false)
+
+console.log(loggedinuser)
 
   useEffect(() => {
     console.log("convos ran")
@@ -22,7 +25,36 @@ function App() {
       .then(resp => resp.json())
       .then(data => {setConvos(JSON.parse(data));
       })
-  }, [loggedinuser])
+  }, [loggedinuser, checkusersagain])
+
+
+    
+    const handleClick = async (val) => {
+    
+
+      const formData = new FormData();
+      formData.append("sender", parseInt(loggedinuser));
+      formData.append("receiver", parseInt(val));
+    
+      try {
+        const response = await fetch('/api/addconvo/', {
+          method: 'POST',
+          body: formData,
+        });
+    
+        // Check if the response was successful
+        if (response.ok) {
+          console.log('User created successfully');
+        } else {
+          console.error('Error:', response.status);
+        }
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    setCheckUsersAgain(!checkusersagain)
+
+  
+  }
 
   useEffect(() => {
     fetch('/api/users/')
@@ -73,7 +105,7 @@ function App() {
               <Route path="/LogIn" element={<LoginModal onLogin={handleLogin}/>}/>
               <Route path="/SignUp" element={<SignUpModal/>}/>
             </Route>
-            <Route path="/messages/:id" element={<Action convos={convos} users={users} entire={entireloggedinuser} loggedinusername={loggedinusername} loggedinuser={loggedinuser}/>} />
+            <Route path="/messages/:id" element={<Action handleClick={handleClick} convos={convos} users={users} entire={entireloggedinuser} loggedinusername={loggedinusername} loggedinuser={loggedinuser}/>} />
             <Route path="/account/:id" element={<Account entire={entireloggedinuser}/>}/>
     </Routes>
     <Outlet/>
