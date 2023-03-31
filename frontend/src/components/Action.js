@@ -17,7 +17,7 @@ console.log(loggedinuser)
 
   return (
     <>
-    <Header entire={entire} loggedinusername={loggedinusername}/>
+    <Header  entire={entire} loggedinusername={loggedinusername}/>
     <div id="main-container">
       <ListComponent users={users} convos={convos} loggedinuser={loggedinuser} />
       <MessageDisplay clickChanger={clickChanger} checkifclicked={checkifclicked} messChanger={messChanger} message={message} messageSend={messageSend} handleClick={handleClick} users={users} convos={convos} loggedinuser={loggedinuser}/>

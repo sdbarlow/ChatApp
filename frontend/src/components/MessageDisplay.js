@@ -50,10 +50,10 @@ console.log(checkifclicked)
 if ((convos.length === 0) || (checkifclicked)){
   return (
     <div id="detail-container">
-      <h1>Conversation {id} Detail</h1>
+      <h1>Start A Conversation</h1>
       <div className="message-container">
         <input type="text" placeholder="Search..." className="search" onChange={(e) => setQuery(e.target.value)}/>
-        <table>
+        <table id="results-table">
           <tbody>
             <tr>
               <th></th>
@@ -63,7 +63,7 @@ if ((convos.length === 0) || (checkifclicked)){
             </tr>
             {search().map((user) => (
               user.pk !== loggedinuser ? (
-                <tr onClick={onClick} id={user.pk} key={user.id}>
+                <tr className="table-row" onClick={onClick} id={user.pk} key={user.id}>
                   <td><div id="mini-image"><img id="user-image" src={user.fields.img}></img></div></td>
                   <td className="user-table-data">{user.fields.first_name}</td>
                   <td className="user-table-data">{user.fields.last_name}</td>
@@ -82,7 +82,6 @@ if ((convos.length === 0) || (checkifclicked)){
       return (
         <div id="detail-container">
           <div id="header-display">
-            <h1>Conversation {id} Detail</h1>
             <div onClick={clickHandler} id="new-message-icon-container">
               <img id="new-message-icon" src='../images/mail.png' />
             </div>
@@ -93,9 +92,9 @@ if ((convos.length === 0) || (checkifclicked)){
                 {convos.sort((a, b) => a.pk - b.pk).map((convo) => {
                   console.log(convo);
                   if (convo.fields.sender == id) {
-                    return <div id="chat-bubble"><h4 className="sender-text">{convo.fields.convo}</h4></div>;
-                  } else if (convo.fields.receiver == id) {
                     return <div id="chat-bubble-two"><h4 className="receiver-text">{convo.fields.convo}</h4></div>;
+                  } else if (convo.fields.receiver == id) {
+                    return <div id="chat-bubble"><h4 className="sender-text">{convo.fields.convo}</h4></div>;
                   }
                   return null;
                 })}

@@ -8,7 +8,7 @@ function Home() {
     <div id="home-container">
     <div id="form-container">
       <h1 id="chat">CHAT</h1>
-      <h1 id="app">APP</h1>
+      <h1 id="app">APP<span id="filler"> '</span></h1>
     </div>
     <div id="buttons-container">
       <button id="sign-up-button"><Link to="/SignUp">Sign up</Link></button>
