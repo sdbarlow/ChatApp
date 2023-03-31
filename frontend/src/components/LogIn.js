@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
-
+import '../Styles/LogIn.css'
 function LoginModal({ onLogin }) {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
@@ -21,14 +21,14 @@ function LoginModal({ onLogin }) {
 
 
   return (
-    <div>
+    <div id="log-in-container">
       <h2>Log in</h2>
-      <form onSubmit={handlesubmit}>
+      <form id="log-in-form" onSubmit={handlesubmit}>
         <label htmlFor="email">Email:</label>
-        <input id="email" name="email" value={email} onChange={handleChange} type="text"/>
+        <input className="input-fields" id="email" name="email" value={email} onChange={handleChange} type="text"/>
         <label htmlFor="password">Password:</label>
-        <input id="password" name="password" value={password} onChange={handleChange} type="text"/>
-        <input type="submit"/>
+        <input className="input-fields" id="password" name="password" value={password} onChange={handleChange} type="text"/>
+        <input id="submit-btn" className="input-fields" value="Enter" type="submit"/>
       </form>
       <Link to="/">Back to home</Link>
     </div>
