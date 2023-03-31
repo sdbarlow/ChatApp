@@ -17,3 +17,8 @@ class Conversation(models.Model):
     sender = models.ForeignKey(User, related_name='sent_conversations', on_delete=models.CASCADE)
     convo = models.CharField(max_length=1000, blank=True)
     receiver = models.ForeignKey(User, related_name='received_conversations', on_delete=models.CASCADE)
+
+
+class Dates(models.Model):
+    convo = models.ForeignKey(Conversation, related_name="conversation_instance", on_delete=models.CASCADE)
+    date = models.CharField(max_length=50, blank=True)
