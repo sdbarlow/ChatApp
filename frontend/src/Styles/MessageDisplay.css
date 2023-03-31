@@ -1,4 +1,28 @@
-@import url("https://fonts.googleapis.com/css2?family=Aldrich&display=swap");
+#chat-bubble {
+  height: auto;
+  width: auto;
+  display: flex;
+  justify-content: center;
+  margin-top: 1vw;
+  align-items: center;
+  border-radius: 10%;
+  margin-left: 50%;
+  border: 10px solid #22c0ea;
+  background-color: #5cceed;
+}
+
+#chat-bubble-two {
+  height: auto;
+  width: auto;
+  display: flex;
+  justify-content: center;
+  margin-top: 1vw;
+  align-items: center;
+  margin-right: 50%;
+  border-radius: 10%;
+  border: 10px solid #cacaca;
+  background-color: #eee8e8;
+}
 
 #detail-container{
     width: 78vw;
@@ -78,7 +102,6 @@
     width:100%;
     height: 100%;
     flex-direction: column;
-    border: 2px solid black;
   }
   
   .sender-field {
@@ -88,7 +111,6 @@
     flex-direction: column;
     height: 100%;
     width: 50%;
-    border: 2px solid black;
   }
 
   .user-table-data{
@@ -116,10 +138,6 @@
   }
 
   .receiver-text{
-    text-align: right;
-    border: 2px solid black;
+    text-align: left;
   }
 
-  .sender-text{
-    border: 2px solid black;
-  }

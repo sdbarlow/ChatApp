@@ -2,6 +2,7 @@ import React from 'react'
 import { useState } from 'react';
 import '../Styles/MessageDisplay.css'
 import { useParams } from 'react-router-dom';
+import { useEffect, useRef } from 'react';
 
 function MessageDisplay({ users, convos, handleClick, loggedinuser, messageSend, message, messChanger }) {
   const { id } = useParams();
@@ -37,6 +38,13 @@ const search = () => {
   );
 }
 
+function ChatBox({ checkifclicked }) {
+  const chatBoxRef = useRef(null);
+
+  useEffect(() => {
+    chatBoxRef.current.scrollTop = chatBoxRef.current.scrollHeight;
+  }, [checkifclicked]);
+}
 console.log(convos.length)
 console.log(checkifclicked)
 if ((convos.length === 0) || (checkifclicked)){
@@ -85,9 +93,9 @@ if ((convos.length === 0) || (checkifclicked)){
                 {convos.sort((a, b) => a.pk - b.pk).map((convo) => {
                   console.log(convo);
                   if (convo.fields.sender == id) {
-                    return <h4 className="sender-text">{convo.fields.convo}</h4>;
+                    return <div id="chat-bubble"><h4 className="sender-text">{convo.fields.convo}</h4></div>;
                   } else if (convo.fields.receiver == id) {
-                    return <h4 className="receiver-text">{convo.fields.convo}</h4>;
+                    return <div id="chat-bubble-two"><h4 className="receiver-text">{convo.fields.convo}</h4></div>;
                   }
                   return null;
                 })}
