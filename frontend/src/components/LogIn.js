@@ -21,6 +21,7 @@ function LoginModal({ onLogin }) {
 
 
   return (
+    <div id="log-in-page">
     <div id="log-in-container">
       <h2>Log in</h2>
       <form id="log-in-form" onSubmit={handlesubmit}>
@@ -31,6 +32,7 @@ function LoginModal({ onLogin }) {
         <input id="submit-btn" className="input-fields" value="Enter" type="submit"/>
       </form>
       <Link to="/">Back to home</Link>
+    </div>
     </div>
   );
 }

@@ -11,8 +11,8 @@ function Home() {
       <h1 id="app">APP<span id="filler"> '</span></h1>
     </div>
     <div id="buttons-container">
-      <button id="sign-up-button"><Link to="/SignUp">Sign up</Link></button>
-      <button id="log-in-button"><Link to="/LogIn">Log in</Link></button>
+      <button id="sign-up-button"><Link className="links" to="/SignUp">Sign up</Link></button>
+      <button id="log-in-button"><Link className="links" to="/LogIn">Log in</Link></button>
     </div>
     </div>
     <Outlet/>
